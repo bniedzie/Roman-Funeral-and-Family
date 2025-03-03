@@ -6,6 +6,17 @@
  */
 
 /**
+ * Updates the citation information for this view.
+ */
+function updateCitation() {
+    let citation = 'Add specific citation format here. Details to include: ';
+    citation += 'Algorithm - ' + $('select#algorithm').val();
+    citation += ' Person - ' + $("#searchedName").html();
+    citation += ' Gens - ' + $("#searchedGensID").html();
+    $('#specificCitation').html(citation);
+}
+
+/**
  * Sets up actions to trigger on person and gens name autocomplete.
  *
  * @param {object} personJSON All possibilities for person autocomplete.
@@ -31,9 +42,11 @@ function setupAutocomplete(personJSON, gensJSON) {
         autoFocus: true,
         select: function(event, ui) {
             jQuery("#searchedID").html(ui.item.id);
+            jQuery("#searchedName").html(ui.item.value);
             jQuery("#searchPerson").val(ui.item.value);
             jQuery("#searchedGensID").html('');
             jQuery("#searchGens").val('');
+            updateCitation();
             jQuery("image.highlighted").each(function(index) {
                 jQuery(this).removeClass('highlighted');
                 jQuery(this).attr('href', function() {
@@ -72,6 +85,7 @@ function setupAutocomplete(personJSON, gensJSON) {
             jQuery("#searchedGensID").html(ui.item.id);
             jQuery("#searchGens").val(ui.item.value);
             jQuery("#searchedID").html('');
+            jQuery("#searchedName").html('');
             jQuery("#searchPerson").val('');
             jQuery("image.highlighted").each(function(index) {
                 jQuery(this).removeClass('highlighted');
@@ -83,6 +97,7 @@ function setupAutocomplete(personJSON, gensJSON) {
             });
             jQuery("g, g *").removeClass('notFocused');
             jQuery("image:not([gens='" + ui.item.id + "'])").addClass('notFocused');
+            updateCitation();
             return true;
         }
     }),
@@ -104,7 +119,8 @@ jQuery(document).ready(function($) {
         $("#searchPerson").val('');
         // Make sure clicking clear does not affect other filters.
         if ($("#searchedID").html() != "") {
-            $("#searchedID").html('')
+            $("#searchedID").html('');
+            $("#searchedName").html('');
             $('g, g *').removeClass('notFocused');
             $("image.highlighted").each(function(index) {
                 $(this).removeClass('highlighted');
@@ -115,6 +131,7 @@ jQuery(document).ready(function($) {
                 return true;
             });
         }
+        updateCitation();
     });
 
     $('#clearGensSearch').on('click', function() {
@@ -124,5 +141,8 @@ jQuery(document).ready(function($) {
             $("#searchedGensID").html('')
             $('g, g *').removeClass('notFocused');
         }
-    })
+        updateCitation();
+    });
+
+    updateCitation();
 });

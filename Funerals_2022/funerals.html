@@ -13,17 +13,18 @@
 <body>
     <div id="filters" class="container">
         <div class="row">
-            <div id="personFilter" class="col-4 row">
+            <div id="personFilter" class="col-4 row funeralHeader">
                 <div class="col-sm-3">
                     <label for="searchPerson">Person:</label>
                 </div>
                 <div class="col-sm-9">
                     <input name="searchPerson" id="searchPerson" type="text" maxlength="255" />
                     <span id="searchedID" hidden></span>
+                    <span id="searchedName" hidden></span>
                     <button id="clearPersonSearch">Clear</button>
                 </div>
             </div>
-            <div id="gensFilter" class="col-4 row">
+            <div id="gensFilter" class="col-4 row funeralHeader">
                 <div class="col-sm-3">
                     <label for="searchGens">Gens:</label>
                 </div>
@@ -33,7 +34,7 @@
                     <button id="clearGensSearch">Clear</button>
                 </div>
             </div>
-            <div id="algorithmFilter" class="col-4 row">
+            <div id="algorithmFilter" class="col-4 row funeralHeader">
                 <div class="col-sm-3">
                     <label for="algorithm">Model:</label>
                 </div>
@@ -45,10 +46,22 @@
                     </select>
                 </div>
             </div>
+	    <div id="citeMe" class="col-4 row funeralHeader">
+                <button type="button" id="citeText">Cite me</button>
+            </div>
         </div>
     </div>
     <!-- D3 visualization injected here -->
     <div id="allFunerals"></div>
+    <!-- Citation popup, based on https://stackoverflow.com/questions/23648497/javascript-pop-up-a-div-element-in-the-center-of-the-webpage -->
+    <div class='citationPopup' style='display: none;'>
+        <div class='close'>&#10006;</div>
+        <h2>Cite This Work</h2>
+        <div id='staticCitation'>Roman Funerals:<br>Insert general citation information here.</div>
+        <!-- Injected by visualization.js.  Alter the format there. -->
+        <div id='specificCitation'></div>
+    </div>
+</div>
 </body>
 
 <footer>

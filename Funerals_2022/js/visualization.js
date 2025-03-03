@@ -266,4 +266,20 @@ jQuery('select#algorithm').on('change', function() {
         jQuery("g, g *").removeClass('notFocused');
         jQuery("image:not([gens='" + selectedGensID + "'])").addClass('notFocused');
     }
+
+    updateCitation();
+});
+
+/**
+ * When the citation button is clicked, show the citation box.
+ */
+jQuery('#citeText').click(function() {
+    jQuery('.citationPopup').show();
+});
+
+/**
+ * When the close button is clicked in the citation box, close the citation box.
+ */
+jQuery('.close').click(function() {
+    jQuery('.citationPopup').hide();
 });
